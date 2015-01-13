@@ -1,0 +1,6 @@
+bin
+obj
+Thread.Locking/bin
+Thread.Locking/obj
+*.user
+*.suo
