@@ -2,5 +2,7 @@ bin
 obj
 Thread.Locking/bin
 Thread.Locking/obj
+Thread.Locking.UnitTest/bin
+Thread.Locking.UnitTest/obj
 *.user
 *.suo

@@ -15,8 +15,21 @@ namespace Thread.Locking
             for (var i = 0; i < NumOfObjects; i++) {
                 objects.Add(new object());
             }
+
+            var tasks = new Task[NumOfThreads];
             var objectStack = new ObjectStack(objects);
-            Parallel.For(0, NumOfThreads, x => objectStack.ThreadSafeMultiPop());
+            for (var i = 0; i < NumOfThreads; i++)
+            {
+                var task = new Task(objectStack.ThreadUnsafeMultiPop);
+                tasks[i] = task;
+            }
+            for (var i = 0; i < NumOfThreads; i++)
+            {
+                tasks[i].Start();
+            }
+
+            //Using this seems to throw exceptions from unit test context
+            //Parallel.For(0, NumOfThreads, x => objectStack.ThreadUnsafeMultiPop());
         }
     }
 }
